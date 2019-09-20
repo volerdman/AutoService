@@ -7,12 +7,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-    color:#ffffff;
-    font-size: 25px; 
-    margin: 20px;
-    text-decoration: none;
-}
+
 
 h1,
 h2 {
@@ -21,6 +16,12 @@ h2 {
     color: rgb(187, 0, 0);
 }
 
+ a {
+  color:#ffffff;
+  font-size: 25px; 
+  margin: 20px;
+  text-decoration: none;
+}
 
   p {
     margin: 0;
@@ -41,6 +42,7 @@ h2 {
     color: black;
     font-weight: 600;
     position:fixed;
+    z-index: 2;
   }
 
   .toolbar span {
@@ -54,14 +56,45 @@ h2 {
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
-    margin-left: -10px;
     margin-right: -8px; 
     width: auto;
     height: 100%;
   }
 
-  .main-content img {
-    float: left;
-    padding: 0 20px 20px 0;
-    width: 40%;
- }
+  .imgblock {
+    position: relative;
+   display: inline-block;
+}
+
+.imgblock img {
+   height: 340px;
+   width: 540px;
+}
+
+.imgblock a {
+  background: #222;
+  border-radius: 2px;
+  color: red;
+  font: 34px arial;
+  line-height: 29px;
+  padding: 3px 5px;
+   left: 0;
+   position: absolute;
+   top: 10px;
+   width: auto;
+   left: 5px;
+}
+.imgblock span {
+  background: #222;
+    color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    font-size: 18px;
+    padding: 3px 5px;
+}
+
+td{
+  margin: 8px;
+}
