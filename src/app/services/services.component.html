@@ -1,1 +1,19 @@
-<p>services works!</p>
+<div class="content" role="main">
+    <h1 style="padding: 18px; font-family: 'Times New Roman', Times, serif;">Услуги</h1>
+    <table>
+        <tr *ngFor="let servicesByCategory of servicesView">
+            <td>
+            <h2>{{servicesByCategory.name}}</h2>
+                <table>
+                    <tr *ngFor="let servicesLine of servicesByCategory.array">
+                        <td *ngFor="let service of servicesLine">
+                            <img src={{service.url}} width="240px" >
+                        </td>
+                        <td *ngFor="let service of servicesLine">
+                            
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>

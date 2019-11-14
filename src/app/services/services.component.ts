@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Service } from './Service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-services',
@@ -7,9 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServicesComponent implements OnInit {
 
-  constructor() { }
+  services: Service[] = [];
+  servicesView: any = [];
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-  }
+    this.httpClient.get('http://localhost:4200/services').subscribe((result: any) => {
+      this.services = result;
+      let categories = [];
+      this.services.forEach(service => {
+        if (categories.includes(service.category)) return;
+        categories.push(service.category);
+      });
+      categories.forEach(category => {
+        this.servicesView.push({
+          name:category,
+          array:[]
+        });
+        this.servicesView[this.servicesView.length-1].array[0] = [];
+        let servicesByCategory = this.services.filter(x => x.category == category);
+        for (let i = 0, j = 0; i * 3 + j < servicesByCategory.length; j++) {
+          if (j > 2) {
+            j = 0;
+            i++;
+            this.servicesView[this.servicesView.length-1].array[i] = [];
+          }
+          this.servicesView[this.servicesView.length-1].array[i][j] = servicesByCategory[i * 3 + j];
+        }
+      });
+      
+      console.log(this.servicesView);
+    });
 
+  }
 }

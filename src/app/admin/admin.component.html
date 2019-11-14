@@ -1,0 +1,36 @@
+<div class="textUnderHeader">
+    <br>
+    <input [(ngModel)]="service.name" type="text" placeholder="name">
+    <input [(ngModel)]="service.category" type="text" placeholder="category">
+    <input [(ngModel)]="service.url" type="text" placeholder="url">
+    <input [(ngModel)]="service.description" type="text" placeholder="description">
+    <input [(ngModel)]="service.price" type="text" placeholder="price">
+    <button (click)="buttonCreateUpdateClick()" [textContent]="isUpdate ? 'Изменить' : 'Добавить'"></button>
+    <br>
+
+    <table rules="all" class="servicesTable">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>category</th>
+                <th>name</th>
+                <th>url</th>
+                <th>description</th>
+                <th>price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let service of services">
+            <td>{{service.id}}</td>
+            <td>{{service.category}}</td>
+            <td>{{service.name}}</td>
+            <td>{{service.url}}</td>
+            <td>{{service.description}}</td>
+            <td>{{service.price}}</td>
+            <td>
+                <button (click)="buttonLoadUpdateClick(service.id)">Обновить</button>
+                <button (click)="buttonDeleteClick(service.id)">Удалить</button>
+            </td>
+        </tr>
+    </table>
+</div>

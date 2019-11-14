@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { PriceComponent } from './price/price.component';
 import { AboutComponent } from './about/about.component';
 import { ServicesComponent } from './services/services.component';
+import { AdminComponent } from './admin/admin.component';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { ServicesComponent } from './services/services.component';
     HeaderComponent,
     PriceComponent,
     AboutComponent,
-    ServicesComponent
+    ServicesComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
