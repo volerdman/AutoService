@@ -14,7 +14,7 @@ export class ServicesComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('http://localhost:4200/services').subscribe((result: any) => {
+    this.httpClient.get('http://localhost:4201/services').subscribe((result: any) => {
       this.services = result;
       let categories = [];
       this.services.forEach(service => {

@@ -1,5 +1,5 @@
 <div class="content" role="main">
-    <h1 style="padding: 18px; font-family: 'Times New Roman', Times, serif;">Услуги</h1>
+    <h1 style="padding: 18px; font-family: 'Times New Roman', Times, serif; margin-top: 35px;">Услуги</h1>
     <table>
         <tr *ngFor="let servicesByCategory of servicesView">
             <td>
@@ -8,6 +8,7 @@
                     <tr *ngFor="let servicesLine of servicesByCategory.array">
                         <td *ngFor="let service of servicesLine">
                             <img src={{service.url}} width="240px" >
+                            <h4>{{service.description}} <br> {{service.price}} </h4>
                         </td>
                         <td *ngFor="let service of servicesLine">
                             

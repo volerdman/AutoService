@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   service: Service = new Service();
 
   constructor(private httpClient: HttpClient) { }
-  way = "localhost:3002";
+  way = "localhost:4201";
   options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
