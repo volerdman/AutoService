@@ -12,7 +12,10 @@ import { AboutComponent } from './about/about.component';
 import { ServicesComponent } from './services/services.component';
 import { AdminComponent } from './admin/admin.component';
 import {HttpClientModule} from '@angular/common/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
+import { RegComponent } from './reg/reg.component'
+import {AuthCookie } from './auth-cookies-handler';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     PriceComponent,
     AboutComponent,
     ServicesComponent,
-    AdminComponent
+    AdminComponent,
+    AuthComponent,
+    RegComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthCookie
   ],
   providers: [],
   bootstrap: [AppComponent]

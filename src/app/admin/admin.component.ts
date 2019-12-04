@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Service } from '../services/Service';
+import { AuthCookie } from '../auth-cookies-handler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,14 +16,24 @@ export class AdminComponent implements OnInit {
   isUpdate: boolean = false;
   service: Service = new Service();
 
-  constructor(private httpClient: HttpClient) { }
-  way = "localhost:4201";
+  constructor(private router: Router, private httpClient: HttpClient, private _authCookie: AuthCookie) { }
+  way = "http://localhost:4201";
   options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
 
   ngOnInit() {
-    this.httpClient.get(`http://${this.way}/services`).subscribe((result: any) => this.services = result);
+    if (!this._authCookie.getAuth()) {
+      return this.router.navigate(["/"]);
+    }
+    this.httpClient.post(`${this.way}/services`, {token: this._authCookie.getAuth(), pageName: "admin"}, this.options).subscribe((result: any) => {
+      if (result) {
+        this.services = result;
+      }
+      else {
+        this.router.navigate(["/"]);
+      }
+    });
   }
 
   buttonCreateUpdateClick() {
@@ -33,10 +45,13 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  Create() {
-    this.httpClient.post(`http://${this.way}/services/create`, this.service, this.options).subscribe((result: any) => {
+  Create(){
+    console.log(this.service);
+    this.httpClient.post(`http://localhost:4201/services/create`,{token: this._authCookie.getAuth(), data: this.service},  this.options).subscribe((result: any) => {
+      console.log(result);
+
       if (!result) return;
-      this.services.push({ id: result.id, name: result.name, category: result.category, url: result.url, description: result.description, price: result.price });
+      this.services.push({id: result.id, name: result.name, category: result.category, url: result.url, description: result.description, price: result.price });
     });
   }
 
@@ -46,7 +61,7 @@ export class AdminComponent implements OnInit {
   }
 
   Update() {
-    this.httpClient.post(`http://${this.way}/services/update`, this.service, this.options).subscribe((result: any) => {
+    this.httpClient.post(`${this.way}/services/update`, {token: this._authCookie.getAuth(), data: this.service}, this.options).subscribe((result: any) => {
       if (!result) return;
       let servicesIndex = this.services.findIndex(x => x.id == result.id);
       if (servicesIndex == -1) return;
@@ -55,11 +70,11 @@ export class AdminComponent implements OnInit {
     });
     this.isUpdate = false;
   }
-
+  
   buttonDeleteClick(id: number) {
-    this.httpClient.post(`http://${this.way}/services/delete`, {
+    this.httpClient.post(`${this.way}/services/delete`, {token: this._authCookie.getAuth(), data: {
       id: id
-    }, this.options).subscribe((result: any) => {
+    }}, this.options).subscribe((result: any) => {
       if (result) {
         let servicesIndex = this.services.findIndex(x => x.id == id);
         if (servicesIndex == -1) return;
