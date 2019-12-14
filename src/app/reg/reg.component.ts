@@ -24,10 +24,10 @@ export class RegComponent implements OnInit {
   }
 
   buttonRegisterClick() {
-    this.httpClient.post(`http://localhost:4201/reg`, {
+    this.httpClient.post(`http://localhost:4201/reg`, `data=${JSON.stringify({
       login: this.login,
       password: this.password
-    }, this.options).subscribe((result: any) => {
+    })}`, this.options).subscribe((result: any) => {
       if (!result) return;
       this.router.navigate(["/auth"]);
     });

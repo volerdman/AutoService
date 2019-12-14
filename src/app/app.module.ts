@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { RegComponent } from './reg/reg.component'
 import {AuthCookie } from './auth-cookies-handler';
+import { ActivateGuard } from './activate-guard';
+import { FilesComponent } from './files/files.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import {AuthCookie } from './auth-cookies-handler';
     ServicesComponent,
     AdminComponent,
     AuthComponent,
-    RegComponent
+    RegComponent,
+    FilesComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthCookie
+    AuthCookie,
+    ActivateGuard
   ],
   providers: [],
   bootstrap: [AppComponent]

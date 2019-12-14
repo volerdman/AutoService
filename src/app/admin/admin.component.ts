@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
     if (!this._authCookie.getAuth()) {
       return this.router.navigate(["/"]);
     }
-    this.httpClient.post(`${this.way}/services`, {token: this._authCookie.getAuth(), pageName: "admin"}, this.options).subscribe((result: any) => {
+    this.httpClient.post(`${this.way}/services`, `data=${JSON.stringify({ token: this._authCookie.getAuth(), pageName: "admin" })}`, this.options).subscribe((result: any) => {
       if (result) {
         this.services = result;
       }
@@ -45,13 +45,13 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  Create(){
+  Create() {
     console.log(this.service);
-    this.httpClient.post(`http://localhost:4201/services/create`,{token: this._authCookie.getAuth(), data: this.service},  this.options).subscribe((result: any) => {
+    this.httpClient.post(`http://localhost:4201/services/create`, `data=${JSON.stringify({ token: this._authCookie.getAuth(), data: this.service })}`, this.options).subscribe((result: any) => {
       console.log(result);
 
       if (!result) return;
-      this.services.push({id: result.id, name: result.name, category: result.category, url: result.url, description: result.description, price: result.price });
+      this.services.push({ id: result.id, name: result.name, category: result.category, url: result.url, description: result.description, price: result.price });
     });
   }
 
@@ -61,7 +61,7 @@ export class AdminComponent implements OnInit {
   }
 
   Update() {
-    this.httpClient.post(`${this.way}/services/update`, {token: this._authCookie.getAuth(), data: this.service}, this.options).subscribe((result: any) => {
+    this.httpClient.post(`${this.way}/services/update`, `data=${JSON.stringify({ token: this._authCookie.getAuth(), data: this.service })}`, this.options).subscribe((result: any) => {
       if (!result) return;
       let servicesIndex = this.services.findIndex(x => x.id == result.id);
       if (servicesIndex == -1) return;
@@ -70,11 +70,13 @@ export class AdminComponent implements OnInit {
     });
     this.isUpdate = false;
   }
-  
+
   buttonDeleteClick(id: number) {
-    this.httpClient.post(`${this.way}/services/delete`, {token: this._authCookie.getAuth(), data: {
-      id: id
-    }}, this.options).subscribe((result: any) => {
+    this.httpClient.post(`${this.way}/services/delete`, `data=${JSON.stringify({
+      token: this._authCookie.getAuth(), data: {
+        id: id
+      }
+    })}`, this.options).subscribe((result: any) => {
       if (result) {
         let servicesIndex = this.services.findIndex(x => x.id == id);
         if (servicesIndex == -1) return;

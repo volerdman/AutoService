@@ -20,7 +20,7 @@ export class ServicesComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.httpClient.post('http://localhost:4201/services', {token: this._authCookie.getAuth(), pageName: "category"}, this.options).subscribe((result: any) => {
+    this.httpClient.post('http://localhost:4201/services', `data=${JSON.stringify({token: this._authCookie.getAuth(), pageName: "category"})}`, this.options).subscribe((result: any) => {
       if (result) {
         this.services = result;
         let categories = [];

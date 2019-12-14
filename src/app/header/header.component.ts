@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   buttonLoginLogoutClick() {
     if (this.isAuthed) {
       this._authCookie.deleteAuth();
-      this.router.navigate(["/"]);
+      this.router.navigate(["/home"]);
     }
     else {
       this.router.navigate(["/auth"]);
